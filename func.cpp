@@ -59,23 +59,23 @@ void shakerSort(int* Array,
     int Right = size - 1;
     while (Left <= Right) {
         iterationCount++;
-        for (int i = Left; i <= Right; ++i) {
-            compareCount++;
-            if (Array[i - 1] < Array[i]) {
-                swap(Array[i - 1], Array[i]);
-                swapCount++;
-            }
-        }
-        Right--;
-
         for (int i = Right; i >= Left; --i) {
             compareCount++;
-            if (Array[i - 1] < Array[i]) {
+            if (Array[i - 1] > Array[i]) {
                 swap(Array[i - 1], Array[i]);
                 swapCount++;
             }
         }
         Left++;
+
+        for (int i = Left; i <= Right; ++i) {
+            compareCount++;
+            if (Array[i - 1] > Array[i]) {
+                swap(Array[i - 1], Array[i]);
+                swapCount++;
+            }
+        }
+        Right--;
 
         outputFile << iterationCount << ": ";
         printArray(Array, 0, size, outputFile);
@@ -123,5 +123,5 @@ void quickSort(int* Array,
 
     iterationCount++;
     outputFile << iterationCount << ": ";
-    printArray(Array, p,r, outputFile);
+    printArray(Array, p, r, outputFile);
 }

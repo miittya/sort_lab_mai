@@ -17,20 +17,20 @@ using namespace std;
 const char fileName[] = "Output.txt";
 
 int main() {
-    setlocale(LC_ALL, "Russian"); //???????????
-    ofstream outputFile(fileName); // ????? ? ????
+    setlocale(LC_ALL, "Russian"); // Локализация
+    ofstream outputFile(fileName); // Вывод в файл
 
-    // ?????????? ???????? ???????
+    // Переменные хранения времени
     std::chrono::steady_clock::time_point begin;
     std::chrono::steady_clock::time_point end;
     std::chrono::nanoseconds result;
 
-    int* shakerSortArray; // ?????????? ???????? ???????
-    int* quickSortArray;
-    int compareCount; // ?????????? ???????? ?????????
-    int swapCount; // ?????????? ???????? ?????????
+    int* shakerSortArray; // Объявление массива для шейкерной сортировки
+    int* quickSortArray; // Объявление массива для быстрой сортировки
+    int compareCount; // Счетчик сравнений
+    int swapCount; // Счетчик пересылок
     int iterationCount; // Счетчик итераций
-    int size; // ?????????? ??????????? ???????
+    int size; // Размер массивов
 
     // Входной контроль
     cout << "Введите размерность массивов: ";
@@ -48,6 +48,14 @@ int main() {
     // Создаем случайную последовательность
     generateRandomSequenceInt(shakerSortArray, size);
     generateRandomSequenceInt(quickSortArray, size);
+
+    // Создаем возрастающую последовательность
+//    generateIncreasingSequenceInt(shakerSortArray, size, 0, size);
+//    generateIncreasingSequenceInt(quickSortArray, size, 0, size);
+
+    // Создаем убывающую последовательность
+//    generateDecreasingSequenceInt(shakerSortArray, size, 0, size);
+//    generateDecreasingSequenceInt(quickSortArray, size, 0, size);
 
 
 
