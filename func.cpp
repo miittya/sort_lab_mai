@@ -77,8 +77,8 @@ void shakerSort(int* Array,
         }
         Right--;
 
-        outputFile << iterationCount << ": ";
-        printArray(Array, 0, size, outputFile);
+//        outputFile << iterationCount << ": ";
+//        printArray(Array, 0, size, outputFile);
     }
 }
 
@@ -122,6 +122,6 @@ void quickSort(int* Array,
     quickSort(Array, q + 1, r, compareCount, swapCount, iterationCount, outputFile);
 
     iterationCount++;
-    outputFile << iterationCount << ": ";
-    printArray(Array, p, r, outputFile);
+//    outputFile << iterationCount << ": ";
+//    printArray(Array, p, r, outputFile);
 }

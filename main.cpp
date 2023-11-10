@@ -67,7 +67,7 @@ int main() {
     outputFile << "ШЕЙКЕРНАЯ СОРТИРОВКА\n";
     outputFile << "Исходный массив: ";
     printArray(shakerSortArray, 0, size, outputFile);
-    outputFile << "\nПромежуточные результаты: \n";
+    outputFile << "\n";
     begin = chrono::steady_clock::now(); // Начало отсчета времени
     shakerSort(shakerSortArray, size, compareCount, swapCount, iterationCount, outputFile);
     end = chrono::steady_clock::now();  // Конец отсчета времени
@@ -88,7 +88,7 @@ int main() {
     outputFile << "БЫСТРАЯ СОРТИРОВКА\n";
     outputFile << "Исходный массив: ";
     printArray(quickSortArray, 0, size, outputFile);
-    outputFile << "\nПромежуточные результаты: \n";
+    outputFile << "\n";
     begin = chrono::steady_clock::now(); // Начало отсчета времени
     quickSort(quickSortArray, 0, size - 1, compareCount, swapCount, iterationCount, outputFile);
     end = chrono::steady_clock::now();  // Конец отсчета времени
