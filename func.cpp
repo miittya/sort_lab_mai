@@ -50,20 +50,22 @@ void generateDecreasingSequenceInt(
 
 void shakerSort(int* Array,
                 int size,
-                int& compareCount,
-                int& swapCount,
+                long& compareCount,
+                long& swapCount,
                 int& iterationCount,
                 ofstream& outputFile
 ) {
     int Left = 1;
     int Right = size - 1;
     while (Left <= Right) {
+        compareCount++;
         iterationCount++;
         for (int i = Right; i >= Left; --i) {
             compareCount++;
             if (Array[i - 1] > Array[i]) {
                 swap(Array[i - 1], Array[i]);
                 swapCount++;
+                compareCount++;
             }
         }
         Left++;
@@ -73,21 +75,35 @@ void shakerSort(int* Array,
             if (Array[i - 1] > Array[i]) {
                 swap(Array[i - 1], Array[i]);
                 swapCount++;
+                compareCount++;
             }
         }
         Right--;
-
-//        outputFile << iterationCount << ": ";
-//        printArray(Array, 0, size, outputFile);
     }
 }
 
 int Partition(int* Array,
                int p,
                int r,
-               int& compareCount,
-               int& swapCount
+               long& compareCount,
+               long& swapCount
 ) {
+//    int x = Array[r];
+//    int L = p - 1;
+//    int R = r + 1;
+//    while (1) {
+//        do {
+//            L++;
+//        } while (Array[L] < x);
+//        do {
+//            R--;
+//        } while (Array[R] > x);
+//        if (L >= R) {
+//            return R;
+//        }
+//        swap(Array[L], Array[R]);
+//    }
+
     int q = p;
     for (int u = p; u < r; ++u) {
         compareCount++;
@@ -106,22 +122,22 @@ int Partition(int* Array,
 void quickSort(int* Array,
                int p,
                int r,
-               int& compareCount,
-               int& swapCount,
+               long& compareCount,
+               long& swapCount,
                int& iterationCount,
                ofstream& outputFile
 ) {
 
 
-    if (p >= r) {
-        return;
+    if (p < r) {
+        compareCount++;
+        int q = Partition(Array, p, r, compareCount, swapCount);
+//        outputFile << q << ' ' << Array[q] << ' ' << endl;
+//        printArray(Array, p, r + 1, outputFile);
+//        outputFile << endl;
+        quickSort(Array, p, q - 1, compareCount, swapCount, iterationCount, outputFile);
+        quickSort(Array, q + 1, r, compareCount, swapCount, iterationCount, outputFile);
     }
 
-    int q = Partition(Array, p, r, compareCount, swapCount);
-    quickSort(Array, p, q - 1, compareCount, swapCount, iterationCount, outputFile);
-    quickSort(Array, q + 1, r, compareCount, swapCount, iterationCount, outputFile);
 
-    iterationCount++;
-//    outputFile << iterationCount << ": ";
-//    printArray(Array, p, r, outputFile);
 }

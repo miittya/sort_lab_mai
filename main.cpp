@@ -25,83 +25,62 @@ int main() {
     std::chrono::steady_clock::time_point end;
     std::chrono::nanoseconds result;
 
-    int* shakerSortArray; // Объявление массива для шейкерной сортировки
-    int* quickSortArray; // Объявление массива для быстрой сортировки
-    int compareCount; // Счетчик сравнений
-    int swapCount; // Счетчик пересылок
+    long compareCount; // Счетчик сравнений
+    long swapCount; // Счетчик пересылок
     int iterationCount; // Счетчик итераций
     int size; // Размер массивов
+    int sizeArray[] = {1000, 10000, 15000, 20000};
 
-    // Входной контроль
-    cout << "Введите размерность массивов: ";
-    if (!(cin >> size)) {
-        cout << "Ошибка: размерность массивов должна быть целым числом!\n";
-        return -2;
+    int* shakerSortArray = new int[100000]();
+    int* quickSortArray = new int[100000]();
+
+    for (int i = 0; i < 4; ++i) {
+        size = sizeArray[i];
+        for (int j = 0; j < 3; ++j) {
+            switch (j) {
+                case 0:
+                    generateRandomSequenceInt(shakerSortArray, size);
+                    generateRandomSequenceInt(quickSortArray, size);
+                    break;
+                case 1:
+                    generateIncreasingSequenceInt(shakerSortArray, size, 0, size);
+                    generateIncreasingSequenceInt(quickSortArray, size, 0, size);
+                    break;
+                case 2:
+                    generateDecreasingSequenceInt(shakerSortArray, size, 0, size);
+                    generateDecreasingSequenceInt(quickSortArray, size, 0, size);
+                    break;
+            }
+
+            if (size <= 50000) {
+                compareCount = 0;
+                swapCount = 0;
+                iterationCount = 0;
+
+                begin = chrono::steady_clock::now(); // Начало отсчета времени
+                shakerSort(shakerSortArray, size, compareCount, swapCount, iterationCount, outputFile);
+                end = chrono::steady_clock::now();  // Конец отсчета времени
+                result = chrono::duration_cast<std::chrono::nanoseconds>(end - begin); // Время работы в наносекундах
+
+                outputFile << 0 << ' ' << size << ' ' << j << ' ' << compareCount << ' ' << swapCount << ' ' << result.count() << endl;
+            }
+
+
+            //quickSort
+            compareCount = 0;
+            swapCount = 0;
+            iterationCount = 0;
+
+
+            begin = chrono::steady_clock::now(); // Начало отсчета времени
+            quickSort(quickSortArray, 0, size - 1, compareCount, swapCount, iterationCount, outputFile);
+            end = chrono::steady_clock::now();  // Конец отсчета времени
+            result = chrono::duration_cast<std::chrono::nanoseconds>(end - begin); // Время работы в наносекундах
+
+            outputFile << 1 << ' ' << size << ' ' << j << ' ' << compareCount << ' ' << swapCount << ' ' << result.count() << endl;
+
+        }
     }
-    if (size < 1) {
-        cout << "Ошибка: размерность массивов должна быть положительным числом";
-        return -1;
-    }
-    shakerSortArray = new int[size]();
-    quickSortArray = new int[size]();
-
-    // Создаем случайную последовательность
-    generateRandomSequenceInt(shakerSortArray, size);
-    generateRandomSequenceInt(quickSortArray, size);
-
-    // Создаем возрастающую последовательность
-//    generateIncreasingSequenceInt(shakerSortArray, size, 0, size);
-//    generateIncreasingSequenceInt(quickSortArray, size, 0, size);
-
-    // Создаем убывающую последовательность
-//    generateDecreasingSequenceInt(shakerSortArray, size, 0, size);
-//    generateDecreasingSequenceInt(quickSortArray, size, 0, size);
-
-
-
-    //shakerSort
-    compareCount = 0;
-    swapCount = 0;
-    iterationCount = 0;
-
-    outputFile << "ШЕЙКЕРНАЯ СОРТИРОВКА\n";
-    outputFile << "Исходный массив: ";
-    printArray(shakerSortArray, 0, size, outputFile);
-    outputFile << "\n";
-    begin = chrono::steady_clock::now(); // Начало отсчета времени
-    shakerSort(shakerSortArray, size, compareCount, swapCount, iterationCount, outputFile);
-    end = chrono::steady_clock::now();  // Конец отсчета времени
-    result = chrono::duration_cast<std::chrono::nanoseconds>(end - begin); // Время работы в наносекундах
-
-    outputFile << "Получившийся массив:" << endl;
-    printArray(shakerSortArray, 0, size, outputFile);
-    outputFile << endl;
-    outputFile << "Количество сравнений: " << compareCount << endl;
-    outputFile << "Количество пересылок: " << swapCount << endl;
-    outputFile << "Время работы: " << result.count() << "\n\n\n";
-
-    //quickSort
-    compareCount = 0;
-    swapCount = 0;
-    iterationCount = 0;
-
-    outputFile << "БЫСТРАЯ СОРТИРОВКА\n";
-    outputFile << "Исходный массив: ";
-    printArray(quickSortArray, 0, size, outputFile);
-    outputFile << "\n";
-    begin = chrono::steady_clock::now(); // Начало отсчета времени
-    quickSort(quickSortArray, 0, size - 1, compareCount, swapCount, iterationCount, outputFile);
-    end = chrono::steady_clock::now();  // Конец отсчета времени
-    result = chrono::duration_cast<std::chrono::nanoseconds>(end - begin); // Время работы в наносекундах
-
-    outputFile << "Получившийся массив:" << endl;
-    printArray(quickSortArray, 0,size, outputFile);
-    outputFile << endl;
-    outputFile << "Количество сравнений: " << compareCount << endl;
-    outputFile << "Количество пересылок: " << swapCount << endl;
-    outputFile << "Время работы: " << result.count() << "\n\n";
-
-
 
     delete[] shakerSortArray;
     delete[] quickSortArray;

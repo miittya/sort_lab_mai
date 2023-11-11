@@ -38,8 +38,8 @@ void generateDecreasingSequenceInt(
 //Шейкерная сортировка
 void shakerSort(int* Array,
                 int size,
-                int& compareCount,
-                int& swapCount,
+                long& compareCount,
+                long& swapCount,
                 int& iterationCount,
                 std::ofstream& outputFile
 );
@@ -48,16 +48,16 @@ void shakerSort(int* Array,
 int Partition(int* Array,
                int p,
                int r,
-               int& compareCount,
-               int& swapCount
+               long& compareCount,
+               long& swapCount
 );
 
 //Быстрая сортировка
 void quickSort(int* Array,
                 int p,
                 int r,
-                int& compareCount,
-                int& swapCount,
+               long& compareCount,
+               long& swapCount,
                 int& iterationCount,
                std::ofstream& outputFile
 );
